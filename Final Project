@@ -1,0 +1,25 @@
+SELECT
+  c.CustomerEmail AS cust_email,
+  c.CustomerCity AS cust_city,
+  o.Date AS order_date,
+  o.Quantity AS order_qty,
+  p.ProdName AS product_name,
+  p.Price AS product_price,
+  pc.CategoryName AS category_name,
+  (o.Quantity * p.Price) AS total_sales
+FROM
+  `internship-bank-muamalat.PT_Sejahtera_Bersama.Orders` AS o
+JOIN
+  `internship-bank-muamalat.PT_Sejahtera_Bersama.Products` AS p
+ON
+  p.ProdNumber = o.ProdNumber
+JOIN
+  `internship-bank-muamalat.PT_Sejahtera_Bersama.ProductCategory` AS pc
+ON
+  p.Category = pc.CategoryID
+JOIN
+  `internship-bank-muamalat.PT_Sejahtera_Bersama.Customers` AS c
+ON
+  o.CustomerID = c.CustomerID
+ORDER BY
+  o.Date ASC;
